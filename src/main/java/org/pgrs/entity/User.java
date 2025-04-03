@@ -1,34 +1,34 @@
 package org.pgrs.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
+@Table(name = "user_0")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Student {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @Column(unique = true)
+    private String email;
+    private String password;
 
-    private String firstName;
-    private String lastName;
-    private String registrationNumber;
-    private String department;
-    private String batch;
+    @Enumerated(EnumType.STRING)
+    private UserRole role;
 
-    @OneToOne
-    private Parent parent;
+    private boolean enabled;
+    private String verificationToken;
 }

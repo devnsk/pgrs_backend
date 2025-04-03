@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Student {
+public class Parent {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -25,10 +25,8 @@ public class Student {
 
     private String firstName;
     private String lastName;
-    private String registrationNumber;
-    private String department;
-    private String batch;
+    private String contactNumber;
 
-    @OneToOne
-    private Parent parent;
+    @OneToOne(mappedBy = "parent")
+    private Student student;
 }
