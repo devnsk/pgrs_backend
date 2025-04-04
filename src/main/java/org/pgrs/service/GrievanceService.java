@@ -53,9 +53,11 @@ public class GrievanceService {
         }).orElseThrow(()->new RuntimeException("Grievance not found"));
     }
 
-    // Delete Grievance
+
     public void deleteGrievance(Long id){
         grievanceRepository.deleteById(id);
     }
+
+
 }
 

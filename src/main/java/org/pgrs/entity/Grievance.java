@@ -28,23 +28,111 @@ public class Grievance {
     private User creator;
 
     @ManyToOne
-    private GrievanceType type;
+    private GrievanceType Type;
 
-    private String title;
-    private String description;
+    private String Title;
+    private String Description;
 
     @Enumerated(EnumType.STRING)
-    private GrievanceStatus status;
+    private GrievanceStatus Status;
 
     @ManyToOne
-    private Employee assignedTo;
+    private Employee AssignedTo;
 
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
+    private LocalDateTime CreatedAt;
+    private LocalDateTime UpdatedAt;
 
     @OneToMany(mappedBy = "grievance")
     private List<GrievanceAttachment> attachments;
 
     @OneToMany(mappedBy = "grievance")
     private List<GrievanceComment> comments;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public User getCreator() {
+        return creator;
+    }
+
+    public void setCreator(User creator) {
+        this.creator = creator;
+    }
+
+    public GrievanceType getType() {
+        return Type;
+    }
+
+    public void setType(GrievanceType type) {
+        Type = type;
+    }
+
+    public String getTitle() {
+        return Title;
+    }
+
+    public void setTitle(String title) {
+        Title = title;
+    }
+
+    public String getDescription() {
+        return Description;
+    }
+
+    public void setDescription(String description) {
+        Description = description;
+    }
+
+    public GrievanceStatus getStatus() {
+        return Status;
+    }
+
+    public void setStatus(GrievanceStatus status) {
+        Status = status;
+    }
+
+    public Employee getAssignedTo() {
+        return AssignedTo;
+    }
+
+    public void setAssignedTo(Employee assignedTo) {
+        AssignedTo = assignedTo;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return CreatedAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        CreatedAt = createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return UpdatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        UpdatedAt = updatedAt;
+    }
+
+    public List<GrievanceAttachment> getAttachments() {
+        return attachments;
+    }
+
+    public void setAttachments(List<GrievanceAttachment> attachments) {
+        this.attachments = attachments;
+    }
+
+    public List<GrievanceComment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<GrievanceComment> comments) {
+        this.comments = comments;
+    }
 }
