@@ -23,12 +23,21 @@ public class Activity {
     private User user;
 
     @Column(name = "logintime")
-    private LocalDateTime loginTime;
+    private LocalDateTime loginTime; // Session Timeline
 
     @Column(name = "logouttime")
-    private LocalDateTime logoutTime;
+    private LocalDateTime logoutTime; // SessionLogged out Timeline
 
-    @Column(name = "browser_name", length = 100)
-    private String browserName;
+    @Column(name = "browser_name")
+    private String browserName; // Stores Browser Name (Chrome/FireFox)
+
+    @Column(name = "ip_address")
+    private String ipAddress; // Stores user IP
+
+    @Column(name = "device_type")
+    private String deviceType; // Stores device info (Mobile/Desktop)
+
+    @Column(name = "location")
+    private String location;
 
 }
