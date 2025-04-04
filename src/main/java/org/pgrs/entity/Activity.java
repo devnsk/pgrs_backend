@@ -16,7 +16,7 @@ public class Activity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer slNo;
+    private Long slNo;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
