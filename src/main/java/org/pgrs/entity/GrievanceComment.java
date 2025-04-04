@@ -45,5 +45,55 @@ public class GrievanceComment {
     private LocalDateTime commentedAt;
 
 
+	public Long getId() {
+		return id;
+	}
+
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+
+	public Grievance getGrievance() {
+		return grievance;
+	}
+
+
+	public void setGrievance(Grievance grievance) {
+		this.grievance = grievance;
+	}
+
+
+	public User getCommentedBy() {
+		return commentedBy;
+	}
+
+
+	public void setCommentedBy(User commentedBy) {
+		this.commentedBy = commentedBy;
+	}
+
+
+	public String getContent() {
+		return content;
+	}
+
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+
+
+	public LocalDateTime getCommentedAt() {
+		return commentedAt;
+	}
+
+
+	public void setCommentedAt(LocalDateTime commentedAt) {
+		this.commentedAt = commentedAt;
+	}
+
+
     // Constructors, getters, and setters
 }
