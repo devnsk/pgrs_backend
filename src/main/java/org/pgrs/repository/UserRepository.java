@@ -1,5 +1,6 @@
 package org.pgrs.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.pgrs.entity.User;
@@ -23,4 +24,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     // Find enabled users by role
     Optional<User> findByRoleAndEnabled(UserRole role, boolean enabled);
+    //Find user by roles
+    List<User> findAllByRole(UserRole role);
 }
