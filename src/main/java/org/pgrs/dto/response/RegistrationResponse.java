@@ -9,12 +9,13 @@ public class RegistrationResponse  {
 	private String studentFirstName;
 	private String studentParentFirstName;
 	private String message;
-	public RegistrationResponse(String firstName, String firstName2, String string) {
-		// TODO Auto-generated constructor stub
-		this.studentFirstName = firstName;
-		this.studentParentFirstName = firstName2;
-		this.message = string;
-	}
+
+//	public RegistrationResponse(String firstName, String firstName2, String string) {
+//		// TODO Auto-generated constructor stub
+//		this.studentFirstName = firstName;
+//		this.studentParentFirstName = firstName2;
+//		this.message = string;
+//	}
 	public String getStudentFirstName() {
 		return studentFirstName;
 	}
