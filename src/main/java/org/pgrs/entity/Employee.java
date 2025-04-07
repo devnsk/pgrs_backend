@@ -2,6 +2,7 @@ package org.pgrs.entity;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -31,6 +32,7 @@ public class Employee {
     private String lastName;
 
     @ManyToOne
+	@JsonBackReference
     private Department department;
 
     @OneToMany(mappedBy = "assignedTo")

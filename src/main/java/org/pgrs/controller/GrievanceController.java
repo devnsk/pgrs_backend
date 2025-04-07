@@ -8,10 +8,10 @@ import org.pgrs.service.GrievanceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/grievance")
@@ -38,5 +38,41 @@ public class GrievanceController {
         GrievanceType savedType = grievanceService.createGrievanceType(grievanceType);
         return new ResponseEntity<>(savedType, HttpStatus.CREATED);
     }
+//    @GetMapping("/pending/{userId}")
+//    public ResponseEntity<List<GrievanceResponse>> getPending(@PathVariable Long userId) {
+//        return ResponseEntity.ok(grievanceService.getPendingGrievancesByUserId(userId));
+//    }
+//
+//    @GetMapping("/in-progress/{userId}")
+//    public ResponseEntity<List<GrievanceResponse>> getInProgress(@PathVariable Long userId) {
+//        return ResponseEntity.ok(grievanceService.getInProgressGrievancesByUserId(userId));
+//    }
+
+    @GetMapping("/pending/{userId}")
+    public ResponseEntity<?> getPending(@PathVariable Long userId) {
+        List<GrievanceResponse> grievances = grievanceService.getPendingGrievancesByUserId(userId);
+
+        if (grievances.isEmpty()) {
+            return ResponseEntity.ok().body(
+                    Map.of("message", "No pending grievances found for this user.")
+            );
+        }
+
+        return ResponseEntity.ok(grievances);
+    }
+
+    @GetMapping("/in-progress/{userId}")
+    public ResponseEntity<?> getInProgress(@PathVariable Long userId) {
+        List<GrievanceResponse> grievances = grievanceService.getInProgressGrievancesByUserId(userId);
+
+        if (grievances.isEmpty()) {
+            return ResponseEntity.ok().body(
+                    Map.of("message", "No grievances in progress for this user.")
+            );
+        }
+
+        return ResponseEntity.ok(grievances);
+    }
+
 
 }

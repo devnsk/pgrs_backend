@@ -6,10 +6,16 @@ import org.pgrs.entity.Grievance;
 import org.pgrs.entity.GrievanceType;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 public interface GrievanceService {
     GrievanceResponse createGrievance(GrievanceCreationRequest grievanceCreationRequest);
 
     GrievanceType createGrievanceType(GrievanceType grievanceType);
+
+    List<GrievanceResponse> getPendingGrievancesByUserId(Long creatorId);
+
+    List<GrievanceResponse> getInProgressGrievancesByUserId(Long creatorId);
 
 }

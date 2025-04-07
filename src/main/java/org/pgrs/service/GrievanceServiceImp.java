@@ -15,7 +15,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -78,6 +80,19 @@ public class GrievanceServiceImp implements GrievanceService {
 
         // Save and return
         return greTypeRepository.save(grievanceType);
+    }
+    @Override
+    public List<GrievanceResponse> getPendingGrievancesByUserId(Long creatorId) {
+        return grievanceRepository.findPendingByCreatorId(creatorId).stream()
+                .map(g -> new GrievanceResponse(g.getId(), g.getCreator().getEmail(), "Pending"))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<GrievanceResponse> getInProgressGrievancesByUserId(Long creatorId) {
+        return grievanceRepository.findInProgressByCreatorId(creatorId).stream()
+                .map(g -> new GrievanceResponse(g.getId(), g.getCreator().getEmail(), "In Progress"))
+                .collect(Collectors.toList());
     }
 
 }
