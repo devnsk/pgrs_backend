@@ -80,4 +80,9 @@ public class GrievanceServiceImp implements GrievanceService {
         return greTypeRepository.save(grievanceType);
     }
 
+    @Override
+    public Long countTotalGrievanceByParent(Long parentId){
+        return grievanceRepository.countByCreatorId(parentId);
+    }
+
 }

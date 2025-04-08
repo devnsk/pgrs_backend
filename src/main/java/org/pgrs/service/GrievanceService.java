@@ -12,4 +12,6 @@ public interface GrievanceService {
 
     GrievanceType createGrievanceType(GrievanceType grievanceType);
 
+    Long countTotalGrievanceByParent(Long parentId);
+
 }
