@@ -14,8 +14,10 @@ public interface GrievanceService {
 
     GrievanceType createGrievanceType(GrievanceType grievanceType);
 
+    // Retrieves all grievances in "PENDING" status created by the specified user.
     List<GrievanceResponse> getPendingGrievancesByUserId(Long creatorId);
 
+    // Retrieves all grievances in "IN_PROGRESS" status created by the specified user.
     List<GrievanceResponse> getInProgressGrievancesByUserId(Long creatorId);
 
 }

@@ -81,6 +81,14 @@ public class GrievanceServiceImp implements GrievanceService {
         // Save and return
         return greTypeRepository.save(grievanceType);
     }
+
+    /**
+     * Fetches all grievances created by the given user where the status is "PENDING".
+     * It then transforms each grievance into a simplified response format.
+     *
+     * @param creatorId The ID of the user who raised the grievances.
+     * @return List of GrievanceResponse containing grievance ID, creator email, and status.
+     */
     @Override
     public List<GrievanceResponse> getPendingGrievancesByUserId(Long creatorId) {
         return grievanceRepository.findPendingByCreatorId(creatorId).stream()
@@ -88,6 +96,13 @@ public class GrievanceServiceImp implements GrievanceService {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * Fetches all grievances created by the given user where the status is "IN_PROGRESS".
+     * Each grievance is mapped into a simplified response structure.
+     *
+     * @param creatorId The ID of the user who raised the grievances.
+     * @return List of GrievanceResponse containing grievance ID, creator email, and status.
+     */
     @Override
     public List<GrievanceResponse> getInProgressGrievancesByUserId(Long creatorId) {
         return grievanceRepository.findInProgressByCreatorId(creatorId).stream()
