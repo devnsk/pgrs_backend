@@ -8,10 +8,10 @@ import org.pgrs.service.GrievanceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/grievance")
@@ -39,4 +39,47 @@ public class GrievanceController {
         return new ResponseEntity<>(savedType, HttpStatus.CREATED);
     }
 
+    /**
+     * Endpoint to retrieve all grievances with status "PENDING" for a specific user.
+     *
+     * @param userId ID of the user whose pending grievances are to be fetched.
+     * @return A list of GrievanceResponse if found, or a message indicating no data.
+     */
+    @GetMapping("/pending/{userId}")
+    public ResponseEntity<?> getPending(@PathVariable Long userId) {
+        // Fetch pending grievances for the given user from the service layer
+        List<GrievanceResponse> grievances = grievanceService.getPendingGrievancesByUserId(userId);
+
+        // If the list is empty, return a message indicating no pending grievances
+        if (grievances.isEmpty()) {
+            return ResponseEntity.ok().body(
+                    Map.of("message", "No pending grievances found for this user.")
+            );
+        }
+
+        // Otherwise, return the list of pending grievances
+        return ResponseEntity.ok(grievances);
+    }
+
+    /**
+     * Endpoint to retrieve all grievances with status "IN_PROGRESS" for a specific user.
+     *
+     * @param userId ID of the user whose in-progress grievances are to be fetched.
+     * @return A list of GrievanceResponse if found, or a message indicating no data.
+     */
+    @GetMapping("/in-progress/{userId}")
+    public ResponseEntity<?> getInProgress(@PathVariable Long userId) {
+        // Fetch in-progress grievances for the given user from the service layer
+        List<GrievanceResponse> grievances = grievanceService.getInProgressGrievancesByUserId(userId);
+
+        // If the list is empty, return a message indicating no grievances in progress
+        if (grievances.isEmpty()) {
+            return ResponseEntity.ok().body(
+                    Map.of("message", "No grievances in progress for this user.")
+            );
+        }
+
+        // Otherwise, return the list of in-progress grievances
+        return ResponseEntity.ok(grievances);
+    }
 }

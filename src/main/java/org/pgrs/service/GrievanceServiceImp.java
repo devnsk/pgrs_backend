@@ -15,7 +15,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -78,6 +80,34 @@ public class GrievanceServiceImp implements GrievanceService {
 
         // Save and return
         return greTypeRepository.save(grievanceType);
+    }
+
+    /**
+     * Fetches all grievances created by the given user where the status is "PENDING".
+     * It then transforms each grievance into a simplified response format.
+     *
+     * @param creatorId The ID of the user who raised the grievances.
+     * @return List of GrievanceResponse containing grievance ID, creator email, and status.
+     */
+    @Override
+    public List<GrievanceResponse> getPendingGrievancesByUserId(Long creatorId) {
+        return grievanceRepository.findPendingByCreatorId(creatorId).stream()
+                .map(g -> new GrievanceResponse(g.getId(), g.getCreator().getEmail(), "Pending"))
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Fetches all grievances created by the given user where the status is "IN_PROGRESS".
+     * Each grievance is mapped into a simplified response structure.
+     *
+     * @param creatorId The ID of the user who raised the grievances.
+     * @return List of GrievanceResponse containing grievance ID, creator email, and status.
+     */
+    @Override
+    public List<GrievanceResponse> getInProgressGrievancesByUserId(Long creatorId) {
+        return grievanceRepository.findInProgressByCreatorId(creatorId).stream()
+                .map(g -> new GrievanceResponse(g.getId(), g.getCreator().getEmail(), "In Progress"))
+                .collect(Collectors.toList());
     }
 
 }
